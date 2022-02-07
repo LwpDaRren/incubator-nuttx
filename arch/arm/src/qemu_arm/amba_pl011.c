@@ -196,6 +196,6 @@ void arm_serialinit(void)
         /* enable receive */
         UARTREG(UART_REG_BASE, UART_CR) |= (1 << 9);
 
-   //HalIrqUnmask(NUM_HAL_INTERRUPT_UART);
+		up_enable_irq(32 + 1);
    //}
 }
