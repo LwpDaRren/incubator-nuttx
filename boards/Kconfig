@@ -1055,6 +1055,16 @@ config ARCH_BOARD_P112
 		Hal Bower was very active in the mid 1990's on the P112 project and ported
 		the "Banked/Portable BIOS".
 
+config ARCH_BOARD_QEMU_ARM_VIRT
+	bool "QEMU ARM virt platform"
+	depends on ARCH_CHIP_QEMU_ARM_A7
+	---help---
+		This is the port of NuttX to the Allwinner A10-based pcDuino v1
+		board.  See http://www.pcduino.com/ for information about pcDuino Lite, v1,
+		and v2.  I have not compared these boards in detail, but I believe that
+		the differences are cosmetic.  This port was developed on the v1 board,
+		but the others may be compatible.
+
 config ARCH_BOARD_PCDUINO_A10
 	bool "pcDuino A10"
 	depends on ARCH_CHIP_A10
@@ -2515,6 +2525,7 @@ config ARCH_BOARD
 	default "open1788"                 if ARCH_BOARD_OPEN1788
 	default "or1k"                     if ARCH_BOARD_OR1K
 	default "p112"                     if ARCH_BOARD_P112
+	default "arm_virt"				   if ARCH_BOARD_QEMU_ARM_VIRT
 	default "pcduino-a10"              if ARCH_BOARD_PCDUINO_A10
 	default "beaglebone-black"         if ARCH_BOARD_BEAGLEBONE_BLACK
 	default "pic32mx-starterkit"       if ARCH_BOARD_PIC32MX_STARTERKIT
@@ -2664,6 +2675,9 @@ config ARCH_IRQBUTTONS
 comment "Board-Specific Options"
 
 
+if ARCH_BOARD_QEMU_ARM_VIRT
+source "boards/arm/qemu_arm/arm_virt/Kconfig"
+endif
 if ARCH_BOARD_PCDUINO_A10
 source "boards/arm/a1x/pcduino-a10/Kconfig"
 endif
